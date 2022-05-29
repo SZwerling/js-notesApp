@@ -4,15 +4,22 @@
 // So there is a javasciprt object that models the html document
 // there is an object provided to us by the browser called 'document'
 
-const notes = [
-   { title: "This is the title", body: "This is the body" },
-   { title: "Note 2", body: "body" },
-   { title: "Note 3", body: "information" },
-];
+let notes = [];
 
 const filters = {
    searchText: ''
 }
+
+// check for existing saved data to update notes arr
+const notesJSON = localStorage.getItem('notes')
+
+if(notesJSON !== null){
+   notes = JSON.parse(notesJSON)
+}
+
+
+
+
 
 const renderNotes = (notesObj, filtersObj) => { //takes arr of objects and a 'filters' object
    const filteredNotes = notesObj.filter((note) => {  //compares arr obj 'title' prop with filters obj 'searchText' prop
@@ -23,7 +30,11 @@ const renderNotes = (notesObj, filtersObj) => { //takes arr of objects and a 'fi
 
    filteredNotes.forEach((item) => {  // for object in arr that matched
       const noteP = document.createElement('p')  //we create a 'p' element
-      noteP.textContent = item.title             //give it the text from the title prop
+      if(item.title.length > 0){
+         noteP.textContent = 'fucked up'             //give it the text from the title prop
+      } else {
+         noteP.textContent = 'Unnamed note.'
+      }
       document.querySelector('#notes').appendChild(noteP)  //and append to div with id 'notes'
    })
 }
@@ -32,8 +43,12 @@ renderNotes(notes, filters) //call right away so that the list is on the page
 
 // event listener callback gets called with an argument that represents the event
 document.querySelector('#create-note').addEventListener("click", (e) => {
-   e.target.textContent="Ya clicked it"
-   console.log(e.target)
+   notes.push({
+      title: '',
+      body: ''
+   })
+   localStorage.setItem('notes', JSON.stringify(notes))
+   renderNotes(notes, filters)
 })
 
 
@@ -42,8 +57,6 @@ document.querySelector('#search-text').addEventListener('input', (e) => {
    renderNotes(notes, filters) //calling renderNotes function with 
 })
 
-document.querySelector('#name-form').addEventListener('submit', (e) => {  //query selector on form id
-   e.preventDefault()  //preventing the default behavior of page refreshing
-   console.log(e.target.elements.firstName.value)  //"elements" allows access to fields of form // firstName is name of input // value is what client input
-   e.target.elements.firstName.value = ''
+document.querySelector('#filter-by').addEventListener('change', (e) => {
+   console.log(e.target.value)
 })
