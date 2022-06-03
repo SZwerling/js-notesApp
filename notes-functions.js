@@ -4,37 +4,50 @@ const getSavedNotes = () => {
    if (notesJSON !== null) {
       return JSON.parse(notesJSON);
    } else {
-      return []
+      return [];
    }
 };
 
-
 // Generate the DOM structure for a note
 const generateNoteDom = (note) => {
-    const noteP = document.createElement('p')  //we create a 'p' element
-    if(note.title.length > 0){
-      noteP.textContent = 'fucked up'             //give it the text from the title prop
-    } else {
-      noteP.textContent = 'Unnamed note.'
-    }
-    return noteP
-}
+   const noteElement = document.createElement("div"); //we create a 'p' element
+   const textElement = document.createElement("span")
+   const button = document.createElement("button");
+
+   // remove note button
+   button.textContent = "x";
+   noteElement.appendChild(button)
+
+   // set note title text
+   if (note.title.length > 0) {
+      textElement.textContent = note.title; //give it the text from the title prop
+   } else {
+      textElement.textContent = "Unnamed note.";
+   }
+   
+   noteElement.appendChild(textElement);
+   return noteElement;
+};
 
 // Render app notes
-const renderNotes = (notesObj, filtersObj) => { //takes arr of objects and a 'filters' object
-    const filteredNotes = notesObj.filter((note) => {  //compares arr obj 'title' property with filters obj 'searchText' prop
-       return note.title.toLowerCase().includes(filtersObj.searchText.toLowerCase())
-    })
- 
-    document.querySelector('#notes').innerHTML = '' //clears all text from div w id 'notes'
- 
-    filteredNotes.forEach((item) => {  
-       const noteP = generateNoteDom(item) //creates p element for each note
-       document.querySelector('#notes').appendChild(noteP)  
-    })
- }
+const renderNotes = (notesObj, filtersObj) => {
+   //takes arr of objects and a 'filters' object
+   const filteredNotes = notesObj.filter((note) => {
+      //compares arr obj 'title' property with filters obj 'searchText' prop
+      return note.title
+         .toLowerCase()
+         .includes(filtersObj.searchText.toLowerCase());
+   });
 
- // Save notes to local storage
- const saveNotes = (notes) => {
-    localStorage.setItem('notes', JSON.stringify(notes))
- }
+   document.querySelector("#notes").innerHTML = ""; //clears all text from div w id 'notes'
+
+   filteredNotes.forEach((item) => {
+      const noteP = generateNoteDom(item); //creates p element for each note
+      document.querySelector("#notes").appendChild(noteP);
+   });
+};
+
+// Save notes to local storage
+const saveNotes = (notes) => {
+   localStorage.setItem("notes", JSON.stringify(notes));
+};
