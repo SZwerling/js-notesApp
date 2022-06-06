@@ -18,6 +18,7 @@ renderNotes(notes, filters) //call right away so that the list is on the page
 // event listener callback gets called with an argument that represents the event
 document.querySelector('#create-note').addEventListener("click", (e) => {
    notes.push({
+      id: uuidv4(),
       title: '',
       body: ''
    })
@@ -34,3 +35,4 @@ document.querySelector('#search-text').addEventListener('input', (e) => {
 document.querySelector('#filter-by').addEventListener('change', (e) => {
    console.log(e.target.value)
 })
+
