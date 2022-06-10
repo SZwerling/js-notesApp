@@ -23,7 +23,7 @@ document.querySelector('#create-note').addEventListener("click", (e) => {
       body: ''
    })
    saveNotes(notes) // defined in notes-functions // saves notes - w new note object - to local storage
-   renderNotes(notes, filters)
+   location.assign('/note.html')
 })
 
 

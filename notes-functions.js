@@ -21,7 +21,7 @@ const removeNote = (id) => {
 // Generate the DOM structure for a note
 const generateNoteDom = (note) => {
    const noteElement = document.createElement("div"); //we create a 'p' element
-   const textElement = document.createElement("span")
+   const textElement = document.createElement("a")
    const button = document.createElement("button");
 
    // remove note button
@@ -33,12 +33,13 @@ const generateNoteDom = (note) => {
       renderNotes(notes, filters)
    })
 
-   // set note title text
+   // set note title text 
    if (note.title.length > 0) {
       textElement.textContent = note.title; //give it the text from the title prop
    } else {
       textElement.textContent = "Unnamed note.";
    }
+   textElement.setAttribute("href", "/note.html") // note title as anchor link
    
    noteElement.appendChild(textElement);
    return noteElement;
