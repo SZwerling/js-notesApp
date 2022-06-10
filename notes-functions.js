@@ -39,7 +39,7 @@ const generateNoteDom = (note) => {
    } else {
       textElement.textContent = "Unnamed note.";
    }
-   textElement.setAttribute("href", "/note.html") // note title as anchor link
+   textElement.setAttribute("href", `/note.html#${note.id}`) // note title as anchor link
    
    noteElement.appendChild(textElement);
    return noteElement;

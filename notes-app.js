@@ -17,13 +17,14 @@ renderNotes(notes, filters) //call right away so that the list is on the page
 
 // event listener callback gets called with an argument that represents the event
 document.querySelector('#create-note').addEventListener("click", (e) => {
+   const newId = uuidv4()
    notes.push({
-      id: uuidv4(),
+      id: newId,
       title: '',
       body: ''
    })
    saveNotes(notes) // defined in notes-functions // saves notes - w new note object - to local storage
-   location.assign('/note.html')
+   location.assign(`/note.html#${newId}`)
 })
 
 
