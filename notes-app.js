@@ -6,7 +6,7 @@
 
 
 // getSavedNotes is defined in notes-functions.js // gets notes arr from local storage
-const notes = getSavedNotes();
+let notes = getSavedNotes();
 
 const filters = {
    searchText: ''
@@ -36,4 +36,11 @@ document.querySelector('#search-text').addEventListener('input', (e) => {
 document.querySelector('#filter-by').addEventListener('change', (e) => {
    console.log(e.target.value)
 })
+
+window.addEventListener("storage", (e) => { // event storage fires when local storage is updated
+   if (e.key === "notes") {        // key is where oldValue and newValue are // only change is e.key equals notes.
+      notes = JSON.parse(e.newValue); // newValue is a JSON array containing all the notes
+      renderNotes(notes, filters);  // rerender to update everything on the screen
+   }
+});
 
