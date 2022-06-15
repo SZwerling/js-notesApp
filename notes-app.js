@@ -44,3 +44,11 @@ window.addEventListener("storage", (e) => { // event storage fires when local st
    }
 });
 
+
+// Unix Epoch is January 1st 1970 00:00:00
+const now = new Date()
+const past = new Date('August 27 1975 4:45:00')
+const timestampOne = now.getTime()
+const timestampTwo = past.getTime()
+const earlyDate = new Date(Math.min(timestampOne, timestampTwo))
+console.log(earlyDate)
