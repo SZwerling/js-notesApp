@@ -45,10 +45,14 @@ window.addEventListener("storage", (e) => { // event storage fires when local st
 });
 
 
-// Unix Epoch is January 1st 1970 00:00:00
-const now = new Date()
-const past = new Date('August 27 1975 4:45:00')
-const timestampOne = now.getTime()
-const timestampTwo = past.getTime()
-const earlyDate = new Date(Math.min(timestampOne, timestampTwo))
-console.log(earlyDate)
+// Unix Epoch starts January 1st 1970 00:00:00
+// const now = new Date()  // built-in js date function
+// const timestampOne = now.getTime()
+// We'll use 'moment' even though it is deprecated 
+
+const now = moment()
+console.log(now.format('MMMM Do, YYYY'))
+
+const birthday = moment()
+birthday.year(1975).month(7).date(27)
+console.log(birthday.format('MMMM Do, YYYY'))
