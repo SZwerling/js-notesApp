@@ -1,3 +1,6 @@
+// git test
+const lastEditedEl = document.querySelector('#last-edited')
+
 const noteId = location.hash.substring(1);
 let notes = getSavedNotes();
 let note = notes.find((note) => {
@@ -13,14 +16,19 @@ const bodyInput = document.querySelector("#note-body");
 
 titleInput.value = note.title;
 bodyInput.value = note.body;
+lastEditedEl.textContent = generateLastEdited(note.updatedAt) //generates message using timestamp
 
 titleInput.addEventListener("input", (e) => {
    note.title = e.target.value;
+   note.updatedAt = moment().valueOf()
+   lastEditedEl.textContent = generateLastEdited(note.updatedAt) //generates message using timestamp
    saveNotes(notes);
 });
 
 bodyInput.addEventListener("input", (e) => {
    note.body = e.target.value;
+   note.updatedAt = moment().valueOf()
+   lastEditedEl.textContent = generateLastEdited(note.updatedAt) //generates message using timestamp
    saveNotes(notes);
 });
 
@@ -42,5 +50,6 @@ window.addEventListener("storage", (e) => {
       }
       titleInput.value = note.title;
       bodyInput.value = note.body;
+      lastEditedEl.textContent = generateLastEdited(note.updatedAt) //generates message using timestamp
    }
 });

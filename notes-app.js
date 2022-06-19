@@ -17,9 +17,13 @@ renderNotes(notes, filters) //call right away so that the list is on the page
 
 // event listener callback gets called with an argument that represents the event
 document.querySelector('#create-note').addEventListener("click", (e) => {
+   const timestamp = moment().valueOf()
    const newId = uuidv4()
+
    notes.push({
       id: newId,
+      createdAt: timestamp,
+      updatedAt: timestamp,
       title: '',
       body: ''
    })
@@ -50,9 +54,3 @@ window.addEventListener("storage", (e) => { // event storage fires when local st
 // const timestampOne = now.getTime()
 // We'll use 'moment' even though it is deprecated 
 
-const now = moment()
-console.log(now.format('MMMM Do, YYYY'))
-
-const birthday = moment()
-birthday.year(1975).month(7).date(27)
-console.log(birthday.format('MMMM Do, YYYY'))
