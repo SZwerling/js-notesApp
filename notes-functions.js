@@ -58,8 +58,18 @@ const sortNotes = (notes, sortBy) => {
             return 0;
          }
       })
-   } else {  // other sorting types not yet supported
-      return notes;
+   } else if(sortBy === 'byCreated'){  // By first created
+      return notes.sort((a, b) => {
+         if(a.createdAt < b.createdAt){
+            return -1;
+         } else if(a.createdAt > b.createdAt){
+            return 1;
+         } else {
+            return 0;
+         }
+      })
+   } else {
+      return notes
    }
 }
 
