@@ -45,8 +45,27 @@ const generateNoteDom = (note) => {
    return noteElement;
 };
 
+
+//sort notes via dropdown
+const sortNotes = (notes, sortBy) => {
+   if(sortBy === 'byEdited'){
+      return notes.sort((a, b) => {
+         if(a.updatedAt > b.updatedAt){
+            return -1;
+         } else if(a.updatedAt < b.updatedAt){
+            return 1;
+         } else {
+            return 0;
+         }
+      })
+   } else {  // other sorting types not yet supported
+      return notes;
+   }
+}
+
 // Render app notes
 const renderNotes = (notesObj, filtersObj) => {
+   notesObj = sortNotes(notesObj, filtersObj.sortBy) // using dropdown sort, eg last edited etc
    //takes arr of objects and a 'filters' object
    const filteredNotes = notesObj.filter((note) => {
       //compares arr obj 'title' property with filters obj 'searchText' prop

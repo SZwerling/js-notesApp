@@ -1,4 +1,4 @@
-// git test
+
 const lastEditedEl = document.querySelector('#last-edited')
 
 const noteId = location.hash.substring(1);
