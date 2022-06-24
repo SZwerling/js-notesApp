@@ -69,7 +69,6 @@ const sortNotes = (notes, sortBy) => {
          }
       })
    } else if(sortBy === 'alphabetical'){
-      console.log('hello')
       return notes.sort((a, b) => {
          if(a.title.toLowerCase() < b.title.toLowerCase()){
             return -1;
@@ -110,6 +109,4 @@ const saveNotes = (notes) => {
 
 // Generate the 'last edited message'
 
-const generateLastEdited = (timestamp) => {
-  return  `Last Edited: ${moment(timestamp).fromNow()}`
-}
+const generateLastEdited = (timestamp) => `Last Edited: ${moment(timestamp).fromNow()}`
