@@ -1,3 +1,4 @@
+'use strict'
 
 const lastEditedEl = document.querySelector('#last-edited')
 

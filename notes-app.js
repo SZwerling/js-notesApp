@@ -1,3 +1,4 @@
+'use strict'
 // DOM document object model
 // Document is the html document
 // Object is a javascript object
