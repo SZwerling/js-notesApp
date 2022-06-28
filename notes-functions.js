@@ -2,7 +2,12 @@
 
 const getSavedNotes = () => {
    const notesJSON = localStorage.getItem("notes");
-   return notesJSON ? JSON.parse(notesJSON) : []
+// try/catch allows the program to continue if JSON data throws an error eg is not JSON
+   try {
+      return notesJSON ? JSON.parse(notesJSON) : []
+   } catch(e) {
+      return []
+   }
 };
 
 // Remove a note from the list
