@@ -22,8 +22,8 @@ const removeNote = (id) => {
 
 // Generate the DOM structure for a note
 const generateNoteDom = (note) => {
-   const noteElement = document.createElement("div"); //we create a 'div' element
-   const textElement = document.createElement("a");
+   const noteElement = document.createElement("a"); //we create an 'a' element
+   const textElement = document.createElement("p");
    const button = document.createElement("button");
 
    // remove note button
@@ -87,18 +87,29 @@ const sortNotes = (notes, sortBy) => {
 
 // Render app notes
 const renderNotes = (notesObj, filtersObj) => {
+   const notesEl = document.querySelector("#notes")
+
    notesObj = sortNotes(notesObj, filtersObj.sortBy); // using dropdown sort, eg last edited etc
    //takes arr of objects and a 'filters' object
    const filteredNotes = notesObj.filter((note) => //compares arr obj 'title' property with filters obj 'searchText' prop
       note.title.toLowerCase().includes(filtersObj.searchText.toLowerCase())
    );
 
-   document.querySelector("#notes").innerHTML = ""; //clears all text from div w id 'notes'
+   notesEl.innerHTML = ""; //clears all text from div w id 'notes'
 
-   filteredNotes.forEach((item) => {
-      const noteP = generateNoteDom(item); //creates p element for each note
-      document.querySelector("#notes").appendChild(noteP);
-   });
+   if(filteredNotes.length > 0){
+      filteredNotes.forEach((item) => {
+         const noteP = generateNoteDom(item); //creates p element for each note
+         notesEl.appendChild(noteP);
+      });
+   } else {
+      const emptyMessage = document.createElement("p")
+      emptyMessage.textContent = "No notes to show"
+      emptyMessage.classList.add('empty-message') // add css class to element created in js
+      notesEl.appendChild(emptyMessage)
+   }
+
+   
 };
 
 // Save notes to local storage
