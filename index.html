@@ -4,18 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link href="/styles/styles.css" rel="stylesheet">
     <title>notes-app</title>
 </head>
 <body>
-    <h1>Notes-Application</h1>
-    <h2>Take notes and never forget.</h2>
-    <input id="search-text" type="text">
-    <select id="filter-by">
-        <option value="byEdited">Last Edited</option>
-        <option value="byCreated">When Created</option>
-        <option value="alphabetical">Alphabetically</option>
-    </select>
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">Notes-Application</h1>
+            <h2 class="header__subtitle">Take notes and never forget.</h2>
+        </div>
+    </header>
+
+    <div class="actions">
+        <div class="actions__container">
+            <input class="input" id="search-text" type="text">
+            <select class="dropdown" id="filter-by">
+                <option value="byEdited">Last Edited</option>
+                <option value="byCreated">When Created</option>
+                <option value="alphabetical">Alphabetically</option>
+            </select>
+        </div>
+    </div>
+   
+    
     <div id="notes"></div>
     <button id="create-note">Create Note</button>
     <!-- order of script files matters
