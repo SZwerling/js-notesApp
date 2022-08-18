@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/styles/styles.css" rel="stylesheet">
-    <title>notes-app</title>
+    <link href="/images/favicon.png" rel="icon">
+    <title>Notes App</title>
 </head>
 <body>
     <header class="header">
@@ -26,9 +27,12 @@
         </div>
     </div>
    
+    <div class="container">
+        <div id="notes"></div>
+        <button class="button" id="create-note">Create Note</button>
+    </div>
     
-    <div id="notes"></div>
-    <button id="create-note">Create Note</button>
+   
     <!-- order of script files matters
     load notes-functions first because they are used in notes-app -->
     <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
