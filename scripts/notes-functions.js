@@ -22,7 +22,7 @@ const removeNote = (id) => {
 
 // Generate the DOM structure for a note
 const generateNoteDom = (note) => {
-   const noteElement = document.createElement("div"); //we create a 'p' element
+   const noteElement = document.createElement("div"); //we create a 'div' element
    const textElement = document.createElement("a");
    const button = document.createElement("button");
 
