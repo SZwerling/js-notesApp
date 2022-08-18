@@ -1,7 +1,6 @@
 'use strict'
 
 // Read existing notes from local storage
-
 const getSavedNotes = () => {
    const notesJSON = localStorage.getItem("notes");
 // try/catch allows the program to continue if JSON data throws an error eg is not JSON
@@ -12,6 +11,7 @@ const getSavedNotes = () => {
    }
 };
 
+
 // Remove a note from the list
 const removeNote = (id) => {
    const noteIndex = notes.findIndex((note) => note.id === id);
@@ -20,10 +20,12 @@ const removeNote = (id) => {
    }
 };
 
+
 // Generate the DOM structure for a note
 const generateNoteDom = (note) => {
    const noteElement = document.createElement("a"); //we create an 'a' element
    const textElement = document.createElement("p");
+   const statusEl = document.createElement("p")
 
    // set note title text
    if (note.title.length > 0) {
@@ -31,11 +33,21 @@ const generateNoteDom = (note) => {
    } else {
       textElement.textContent = "Unnamed note.";
    }
-   textElement.setAttribute("href", `/note.html#${note.id}`); // note title as anchor link
-
+   
+   textElement.classList.add('list-item__title')
    noteElement.appendChild(textElement);
+
+   // set up the link
+   noteElement.setAttribute("href", `/note.html#${note.id}`); 
+   noteElement.classList.add('list-item')
+   // set up status message
+   statusEl.textContent = generateLastEdited(note.updatedAt)
+   statusEl.classList.add("list-item__subtitle")
+   noteElement.appendChild(statusEl)
+
    return noteElement;
 };
+
 
 //sort notes via dropdown
 const sortNotes = (notes, sortBy) => {
@@ -75,6 +87,7 @@ const sortNotes = (notes, sortBy) => {
    }
 };
 
+
 // Render app notes
 const renderNotes = (notesObj, filtersObj) => {
    const notesEl = document.querySelector("#notes")
@@ -102,12 +115,13 @@ const renderNotes = (notesObj, filtersObj) => {
    
 };
 
+
 // Save notes to local storage
 const saveNotes = (notes) => {
    localStorage.setItem("notes", JSON.stringify(notes));
 };
 
-// Generate the 'last edited message'
 
+// Generate the 'last edited message'
 const generateLastEdited = (timestamp) =>
    `Last Edited: ${moment(timestamp).fromNow()}`;
